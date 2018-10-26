@@ -8,9 +8,11 @@ from linecache import getline
 def pick_random_words(words_amt):
     counter = 0
     words = ''
+    total_words = 235885
+
     while counter < words_amt:
         #choose a random line of the file, therefore a random word
-        words += getline("/usr/share/dict/words", randint(0, 235885))
+        words += getline("/usr/share/dict/words", randint(0, total_words))
         counter += 1
     return words
 
