@@ -20,12 +20,8 @@ def read_sys_dict():
 
     return system_word_list
 
-
+#Autocomplete the input word.
 def autocomplete(word_start):
-    """Autocomplete the input word.
-    word_start: the beginning of the words needed to autocomplete.
-    returns: a list of words that start with the input string.
-    """
     word_list = read_sys_dict()
     regex_pattern = '^' + word_start #create the regex_pattern by appending a ^ to the user's input
 
@@ -33,9 +29,10 @@ def autocomplete(word_start):
     #which can be used for matching using its match(), search() and more methods.
     r = re.compile(regex_pattern)
 
+    # filter creates a list of elements for which a function returns true
     matching_words = filter(r.match, word_list)
-    return list(matching_words)
 
+    return list(matching_words)
 
 if __name__ == '__main__':
     input = sys.argv[1]

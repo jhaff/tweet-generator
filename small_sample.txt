@@ -1,0 +1,11 @@
+This is a test sample text.
+
+Just trying to give my program something super small so it runs quickly.
+
+I could say lots of things here, but it really doesn't matter.
+
+The chances of someone reading this are little to none, but here you are.
+
+Were you meant to be here? Is this fate? Am I about to drop some wisdom on you?
+
+Nope, that's not what this is for. This is to count words and learn to code!
