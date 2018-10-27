@@ -1,5 +1,7 @@
 """Script that takes a .txt as a command line argument and counts every instance of every word.
 Uses a tuple with the word and its count, inserted into a list of tuples.
+
+Script unfinished. Bug where words are repeated in output persists.
 """
 
 import sys
@@ -11,6 +13,8 @@ def histogram(words):
             # count() function in an inbuilt function
             # that returns the number of occurrences of a substring in the given string.
             word_list.append((word, words.count(word))); #add a tuple containing the word and its count to word_list
+        else:
+
     return word_list
 
 #opens a file once so the program needs not do it over and over
