@@ -1,4 +1,6 @@
-"""Script that takes a .txt as a command line argument and counts every instance of every word"""
+"""Script that takes a .txt as a command line argument and counts every instance of every word.
+Uses a list of lists.
+"""
 
 import sys
 
