@@ -1,5 +1,5 @@
 import random
-import word_count
+import generate_histogram
 #module to select one word based on commonness(frequency) in the given histogram
 
 def weighted_random_word(histogram_dict):
