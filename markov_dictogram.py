@@ -1,6 +1,7 @@
 from dictogram import Dictogram
+
 class Markov_Dictogram(Dictogram):
-"""This generates a markov chain given a word list.
+    """This generates a markov chain given a word list.
     The chain consists of multiple dictionaries within a larger dictionary.
     For example, the Markov_Dictogram of one fish two fish red fish blue fish
     would look like :

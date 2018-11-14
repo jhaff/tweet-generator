@@ -10,12 +10,12 @@ def weighted_random_word(histogram_dict):
     #Creates a running total value
     total_word_count = 0
     #Gets a random number between 0 and the total sum of all frequencies
-    sum_dictionary = sum(histogram_dictionary.values())
+    sum_dictionary = sum(histogram_dict.values())
 
     # Either [1,  sum] or [0, sum - 1] otherwise it repeats inappropraitely
     random_word_index = random.randint(0, sum_dictionary - 1)
     # ".items()" allows the dictionary to be iterated over
-    for key, value in histogram_dictionary.items():
+    for key, value in histogram_dict.items():
         total_word_count += value
         if total_word_count > random_word_index:
             return key
