@@ -100,12 +100,34 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
+        Best case running time: O(1) when the item to delete is the head.
+        Worst case running time: O(size) when the item to del is the tail"""
+        # Loop through all nodes to find one whose data matches given item
+        # Update previous node to skip around node with matching data
+        # Otherwise raise error to tell user that delete has failed
+        # raise ValueError('Item not found: {}'.format(item))
+
+        #initialize variables
+        previous = None #to keep track of the node behind the node we're checking
+        found = False #condition for the while loop
+        node = self.head #initialize node to the head
+        while not found and node is not None:
+            if node.data == item:
+                # if NOT at the head, link the previous node with the next one
+                if previous is not None:
+                    previous.next = node.next #skips over node, leaving it linkless
+                # if it IS at the head, point the head to the next node
+                else:
+                    self.head = node.next
+                # if at the tail, point the tail to the previous node
+                if node.next is None:
+                    self.tail = previous
+                self.list_length -= 1
+                found = True
+            previous = node #store the current node in the previous variable
+            node = node.next #move on
+        if not found:
+            raise ValueError('Item not found: {}'.format(item))
 
 
 def test_linked_list():
