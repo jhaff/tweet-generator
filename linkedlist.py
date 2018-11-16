@@ -48,24 +48,29 @@ class LinkedList(object):
         return items  # O(1) time to return list
 
     def is_empty(self):
-        """
-        Return a boolean indicating whether this linked list is empty.
-        O(1) because it's a simple variable check
-        """
+        """Return a boolean indicating whether this linked list is empty.
+        O(1) because it's a simple variable check"""
         return self.head is None #No head, empty linkedlist.
 
     def length(self):
-        """
-        Return the length of this linked list by traversing its nodes.
-        O(1) because it's a simple variable check
-        """
+        """Return the length of this linked list.
+        O(1) because it's a simple variable check.
+        If we traversed its nodes to get the length, this would be O(n)"""
         return self.size #using our instance variable set above
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Append node after tail, if it exists
+        Running time: O(1) because we simply replace the tail, and not loop 
+        through the whole list."""
+        # Create new node to hold given item
+        node = Node(item)
+        # Append node after tail, if it exists
+        if self.tail is not None:
+            self.tail.next = node #extend list one past the tail, inserting node
+            self.tail = node #reset the tail to the new correct node
+        else: #if the list is empty, the head and tail is the same node.
+            self.head = node
+            self.tail = node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
