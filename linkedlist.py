@@ -21,7 +21,6 @@ class LinkedList(object):
         if items is not None:
             for item in items:
                 self.append(item)
-                self.size += 1 #increment our size for each given node
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -60,23 +59,32 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Running time: O(1) because we simply replace the tail, and not loop 
+        Running time: O(1) because we simply replace the tail, and not loop
         through the whole list."""
         # Create new node to hold given item
-        node = Node(item)
+        new_node = Node(item)
         # Append node after tail, if it exists
         if self.tail is not None:
-            self.tail.next = node #extend list one past the tail, inserting node
-            self.tail = node #reset the tail to the new correct node
+            self.tail.next = new_node #extend list one past the tail, inserting node
+            self.tail = new_node #reset the tail to the new correct node
         else: #if the list is empty, the head and tail is the same node.
-            self.head = node
-            self.tail = node
+            self.head = new_node
+            self.tail = new_node
+        self.size += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        TODO: Running time: O(1) because we simply replace the head and link it
+        rather than running through the whole linkedlist"""
+        new_node = Node(item)
+        # Prepend node before head, if it exists
+        if self.head is not None:
+            new_node.next = self.head #move over the self.head and put node in front
+            self.head = new_node #reset the head to the new correct node
+        else: #if the list is empty, the head and tail is the same node.
+            self.head = new_node
+            self.tail = new_node
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
