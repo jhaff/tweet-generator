@@ -9,7 +9,6 @@ class Node(object):
         """Return a string representation of this node."""
         return 'Node({!r})'.format(self.data)
 
-
 class LinkedList(object):
 
     def __init__(self, items=None):
@@ -95,8 +94,6 @@ class LinkedList(object):
             if quality(node.data): #if the .data of the current node has quality
                 return node.data #return it
             node = node.next #move on to the next node
-        return match
-
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -122,13 +119,24 @@ class LinkedList(object):
                 # if at the tail, point the tail to the previous node
                 if node.next is None:
                     self.tail = previous
-                self.list_length -= 1
+                self.size -= 1
                 found = True
             previous = node #store the current node in the previous variable
             node = node.next #move on
         if not found:
             raise ValueError('Item not found: {}'.format(item))
 
+    def replace(self, target, replacement):
+        # iterate through linked list until we find the target, then replace the data
+        found = False #condition for the while loop
+        node = self.head #initialize node to the head
+        while not found and node is not None:
+            if node.data == target: #if current node's data matches our target
+                node.data = replacement #swap out the data for the replacement
+                found = True #stop the loop
+            node = node.next #move on
+        if not found:
+            raise ValueError('Replacement target not found: {}'.format(target))
 
 def test_linked_list():
     ll = LinkedList()
