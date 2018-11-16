@@ -1,6 +1,3 @@
-#!python
-
-
 class Node(object):
 
     def __init__(self, data):
@@ -19,10 +16,12 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.size = 0  # how many nodes in our linked list
         # Append given items
         if items is not None:
             for item in items:
                 self.append(item)
+                self.size += 1 #increment our size for each given node
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -49,13 +48,18 @@ class LinkedList(object):
         return items  # O(1) time to return list
 
     def is_empty(self):
-        """Return a boolean indicating whether this linked list is empty."""
-        return self.head is None
+        """
+        Return a boolean indicating whether this linked list is empty.
+        O(1) because it's a simple variable check
+        """
+        return self.head is None #No head, empty linkedlist.
 
     def length(self):
-        """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
+        """
+        Return the length of this linked list by traversing its nodes.
+        O(1) because it's a simple variable check
+        """
+        return self.size #using our instance variable set above
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
