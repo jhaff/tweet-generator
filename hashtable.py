@@ -59,14 +59,21 @@ class HashTable(object):
         for bucket in self.buckets:
             for key, value in bucket.items():
                 #make sure there are entries in both spaces
-                if bucket[key[0]] is not None and bucket[key[1]] is not None: 
+                if bucket[key[0]] is not None and bucket[key[1]] is not None:
         return counter
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
+        O(1) constant time complexity because you simply access a key
+        *Though because we are using "in" items, so is that a loop?
+        Yes, but we are only looping through the (few) items in that bucket"""
+        #find the bucket (ll) that has our key in it
+        bucket = self.buckets[self._bucket_index(key)]
+        items = bucket.items() #access all the items in that bucket
+        # if key is in the bucket corresponding to its bucket index
+        if hash(key) in items:
+            return True
+        return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
