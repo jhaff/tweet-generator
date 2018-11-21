@@ -76,30 +76,38 @@ class HashTable(object):
         return False
 
     def get(self, key):
-        """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, return value associated with given key
-        # TODO: Otherwise, raise error to tell user get failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
+         """Return the value associated with the given key, or raise KeyError.
+        O(1)"""
+        if self.contains(key):
+            #find the bucket (ll) that has our key in it
+            bucket = self.buckets[self._bucket_index(key)]
+            #search for the value associated with that key within that bucket
+            return bucket.find(key)
+        raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, update value associated with given key
-        # TODO: Otherwise, insert given key-value entry into bucket
+        O(1)"""
+        if self.contains(key):
+            #find the bucket (ll) that has our key in it
+            bucket = self.buckets[self._bucket_index(key)]
+            bucket.replace(key, value) #replace the found key with the new value
+        else:
+            raise KeyError('Key not found: {}'.format(key))
 
-    def delete(self, key):
+    def delete(self, given_key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, delete entry associated with given key
-        # TODO: Otherwise, raise error to tell user delete failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
+        O(n^2). It iterates through the hash table in a nested for loop"""
+        prev = None
+        for bucket in self.buckets:
+            for key, value in bucket.items():
+                if key == given_key:
+                    bucket(key[1]) == None #wipe out the value
+                    bucket(key[0]) == None #wipe out the keyself.
+
+        #TODO: however, does this just leave a hole?? what
+
+        # raise KeyError('Key not found: {}'.format(key)) unsure where to put
 
 
 def test_hash_table():
