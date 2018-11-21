@@ -54,12 +54,14 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        O(n^2). Iterates trhough the hash table in a nested for loop"""
+        O(n^2). Iterates trhough the hash table in a nested for loop
+        TODO: This may be innefficient."""
         counter = 0
         for bucket in self.buckets:
             for key, value in bucket.items():
                 #make sure there are entries in both spaces
                 if bucket[key[0]] is not None and bucket[key[1]] is not None:
+                    counter += 1 #increment our counter if there's data there
         return counter
 
     def contains(self, key):
@@ -98,12 +100,11 @@ class HashTable(object):
     def delete(self, given_key):
         """Delete the given key from this hash table, or raise KeyError.
         O(n^2). It iterates through the hash table in a nested for loop"""
-        prev = None
         for bucket in self.buckets:
             for key, value in bucket.items():
                 if key == given_key:
                     bucket(key[1]) == None #wipe out the value
-                    bucket(key[0]) == None #wipe out the keyself.
+                    bucket(key[0]) == None #wipe out the key itself.
 
         #TODO: however, does this just leave a hole?? what
 
