@@ -59,9 +59,7 @@ class HashTable(object):
         counter = 0
         for bucket in self.buckets:
             for key, value in bucket.items():
-                #make sure there are entries in both spaces
-                if bucket[key[0]] is not None and bucket[key[1]] is not None:
-                    counter += 1 #increment our counter if there's data there
+                counter += 1 #increment our counter
         return counter
 
     def contains(self, key):
@@ -71,31 +69,44 @@ class HashTable(object):
         Yes, but we are only looping through the (few) items in that bucket"""
         #find the bucket (ll) that has our key in it
         bucket = self.buckets[self._bucket_index(key)]
-        items = bucket.items() #access all the items in that bucket
+        # ('I', 1)
         # if key is in the bucket corresponding to its bucket index
-        if hash(key) in items:
-            return True
-        return False
+        # def matches_key(entry):
+        #     return entry[0] == key
+        #variable storing a function to be called later
+        # matches_key = lambda entry: entry[0] == key
+        # #find the entry containing the key we're looking for
+        # entry = bucket.find(quality=matches_key)
+        entry = bucket.find(quality=lambda entry: entry[0] == key)
+
+        return entry is not None
 
     def get(self, key):
-         """Return the value associated with the given key, or raise KeyError.
+        """Return the value associated with the given key, or raise KeyError.
         O(1)"""
         if self.contains(key):
             #find the bucket (ll) that has our key in it
             bucket = self.buckets[self._bucket_index(key)]
             #search for the value associated with that key within that bucket
-            return bucket.find(key)
+
+            entry = bucket.find(quality=lambda entry: entry[0] == key)
+            #...
+            return entry[1] #return just the value of our entry
         raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         O(1)"""
-        if self.contains(key):
-            #find the bucket (ll) that has our key in it
-            bucket = self.buckets[self._bucket_index(key)]
-            bucket.replace(key, value) #replace the found key with the new value
-        else:
-            raise KeyError('Key not found: {}'.format(key))
+        # find the bucket (ll) that has our key in it
+        bucket = self.buckets[self._bucket_index(key)]
+        if self.contains(key):  # update existing entry
+            #find the entry containing the key we're looking for
+            entry = bucket.find(quality=lambda entry: entry[0] == key)
+            # replace the found key with the new value
+            bucket.replace(target=entry, replacement=(key, value))
+        else:  # insert a new entry
+            bucket.append(item=(key, value))
+
 
     def delete(self, given_key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -116,10 +127,13 @@ def test_hash_table():
     print('hash table: {}'.format(ht))
 
     print('\nTesting set:')
-    for key, value in [('I', 1), ('V', 5), ('X', 10)]:
+    for key, value in [('I', 1), ('V', 5), ('X', 11)]:
         print('set({!r}, {!r})'.format(key, value))
         ht.set(key, value)
         print('hash table: {}'.format(ht))
+    ht.set('X',10)
+    print('hash table: {}'.format(ht))
+    return "yay"
 
     print('\nTesting get:')
     for key in ['I', 'V', 'X']:
