@@ -54,8 +54,9 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        O(n^2). Iterates trhough the hash table in a nested for loop
-        TODO: This may be innefficient."""
+        O(n) because you must traverse all buckets and all keys within buckets
+        to get the length of each.
+        If you use the .size property, then it would be O(b)"""
         counter = 0
         for bucket in self.buckets:
             for key, value in bucket.items():
@@ -69,7 +70,6 @@ class HashTable(object):
         Yes, but we are only looping through the (few) items in that bucket"""
         #find the bucket (ll) that has our key in it
         bucket = self.buckets[self._bucket_index(key)]
-        # ('I', 1)
         # if key is in the bucket corresponding to its bucket index
         # def matches_key(entry):
         #     return entry[0] == key
@@ -110,7 +110,7 @@ class HashTable(object):
 
     def delete(self, given_key):
         """Delete the given key from this hash table, or raise KeyError.
-        O(n^2). It iterates through the hash table in a nested for loop"""
+        O(n^2). It iterates through the hash table in a nested for loop (innefficient)"""
         for bucket in self.buckets:
             for key, value in bucket.items():
                 if key == given_key:
