@@ -108,18 +108,21 @@ class HashTable(object):
             bucket.append(item=(key, value))
 
 
-    def delete(self, given_key):
+    def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        O(n^2). It iterates through the hash table in a nested for loop (innefficient)"""
-        for bucket in self.buckets:
-            for key, value in bucket.items():
-                if key == given_key:
-                    bucket(key[1]) == None #wipe out the value
-                    bucket(key[0]) == None #wipe out the key itself.
-
-        #TODO: however, does this just leave a hole?? what
-
-        # raise KeyError('Key not found: {}'.format(key)) unsure where to put
+        Best case O(1) if given key is the first item in the first bucket.
+        Worst case O(n) You need to traverse all buckets and
+        the found bucket for key"""
+        # find the bucket (ll) that has our key in it
+        bucket = self.buckets[self._bucket_index(key)]
+        # Check if key-value entry exists in bucket
+        entry = bucket.find(quality=lambda entry: entry[0] == key)
+        # If found, delete entry associated with given key
+        if entry:
+            bucket.delete(entry)
+        # Otherwise, raise error to tell user delete failed
+        else:
+            raise KeyError('Key not found: {}'.format(key))
 
 
 def test_hash_table():
@@ -133,7 +136,7 @@ def test_hash_table():
         print('hash table: {}'.format(ht))
     ht.set('X',10)
     print('hash table: {}'.format(ht))
-    return "yay"
+
 
     print('\nTesting get:')
     for key in ['I', 'V', 'X']:
@@ -143,18 +146,14 @@ def test_hash_table():
     print('contains({!r}): {}'.format('X', ht.contains('X')))
     print('length: {}'.format(ht.length()))
 
-    # Enable this after implementing delete method
-    delete_implemented = False
-    if delete_implemented:
-        print('\nTesting delete:')
-        for key in ['I', 'V', 'X']:
-            print('delete({!r})'.format(key))
-            ht.delete(key)
-            print('hash table: {}'.format(ht))
+    print('\nTesting delete:')
+    for key in ['I', 'V', 'X']:
+        print('delete({!r})'.format(key))
+        ht.delete(key)
+        print('hash table: {}'.format(ht))
 
-        print('contains(X): {}'.format(ht.contains('X')))
-        print('length: {}'.format(ht.length()))
-
+    print('contains(X): {}'.format(ht.contains('X')))
+    print('length: {}'.format(ht.length()))
 
 if __name__ == '__main__':
     test_hash_table()
