@@ -88,7 +88,7 @@ class LinkedList(object):
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         Best case: O(1) if head is a match and has quality
-        Worst case: O(size) if tail is the only node with the given quality"""
+        Worst case: O(n) if tail is the only node with the given quality"""
         node = self.head
         while node is not None:
             if quality(node.data): #if the .data of the current node has quality
@@ -98,7 +98,7 @@ class LinkedList(object):
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
         Best case running time: O(1) when the item to delete is the head.
-        Worst case running time: O(size) when the item to del is the tail"""
+        Worst case running time: O(n) when the item to del is the tail"""
         # Loop through all nodes to find one whose data matches given item
         # Update previous node to skip around node with matching data
         # Otherwise raise error to tell user that delete has failed

@@ -1,5 +1,6 @@
 from flask import Flask
 from form_sentence import generate_markov_sentence
+from split_text_file import tokenize_text
 import split_text_file
 from dictogram import Dictogram
 from markov_dictogram import Markov_Dictogram
@@ -9,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
 
-    word_list = split_text_file.split_text("huck_finn.txt")
+    word_list = tokenize_text("huck_finn.txt")
 
     histogram = Dictogram(word_list)
 
