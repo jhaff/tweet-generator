@@ -4,6 +4,8 @@ from split_text_file import tokenize_text
 import split_text_file
 from dictogram import Dictogram
 from markov_dictogram import Markov_Dictogram
+from second_markov_dictogram import Second_Markov_Dictogram
+
 
 app = Flask(__name__)
 
@@ -14,8 +16,8 @@ def hello_world():
 
     histogram = Dictogram(word_list)
 
-    markov_histogram = Markov_Dictogram(word_list)
+    markov_histogram = Second_Markov_Dictogram(word_list)
 
-    sentence = generate_markov_sentence(histogram,markov_histogram,20)
+    sentence = generate_markov_sentence(markov_histogram,14)
 
     return sentence
