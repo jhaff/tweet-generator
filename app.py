@@ -1,5 +1,5 @@
 from flask import Flask
-from form_sentence import generate_markov_sentence
+from form_sentence import generate_second_order_markov_sentence
 from split_text_file import tokenize_text
 import split_text_file
 from dictogram import Dictogram
@@ -18,6 +18,6 @@ def hello_world():
 
     markov_histogram = Second_Markov_Dictogram(word_list)
 
-    sentence = generate_markov_sentence(markov_histogram,14)
+    sentence = generate_second_order_markov_sentence(markov_histogram,14)
 
     return sentence

@@ -1,4 +1,5 @@
 import sample
+import random
 
 """generates a sentence with use of the markov histogram"""
 def generate_markov_sentence(word_histogram,markov_histogram,amount_of_words):

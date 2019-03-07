@@ -7,11 +7,12 @@ def tokenize_text(text_file):
     of all the words in the text file '''
     try:
         with open(text_file, 'r') as myfile:
-            text_without_punctuation = myfile.read().translate(string.punctuation)
+            # text_without_punctuation = myfile.read().translate(string.punctuation)
+            remove_periods = re.sub('(\s\.){4,}', ' ', myfile.read())
 
             #remove any character that is not in a-z, A-Z whitespace.
             #Also remove end-of-line statements
-            cleaned_first_sweep = re.sub('[^a-zA-Z\s]*$','',text_without_punctuation)
+            cleaned_first_sweep = re.sub('[^a-zA-Z\s]*$','',remove_periods)
 
             #allow the following
             white_list = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
