@@ -56,11 +56,10 @@ class HashTable(object):
         """Return the number of key-value entries by traversing its buckets.
         O(n) because you must traverse all buckets and all keys within buckets
         to get the length of each.
-        If you use the .size property, then it would be O(b)"""
+        If you use the .size property (I AM), then it would be O(b)"""
         counter = 0
         for bucket in self.buckets:
-            for key, value in bucket.items():
-                counter += 1 #increment our counter
+            counter += bucket.size #alternative (faster) length calc
         return counter
 
     def contains(self, key):
