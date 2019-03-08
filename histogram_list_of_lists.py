@@ -24,6 +24,6 @@ def open_and_split_file(filename):
     words = open(sys.argv[1], "r").read().split()
     return words
 
-filename = sys.argv[1] #user specified file to read
-words_to_analyze = open_and_split_file(filename)
-print(histogram(words_to_analyze))
+# filename = sys.argv[1] #user specified file to read
+# words_to_analyze = open_and_split_file(filename)
+# print(histogram(words_to_analyze))
